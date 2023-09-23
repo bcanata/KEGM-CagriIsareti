@@ -1,0 +1,15 @@
+{
+  "name": "kiyiemniyeticagriisareti",
+  "version": "1.0.0",
+  "description": "Kıyı Emniyeti Genel Müdürlüğü Çağrı İşareti Sorgulama",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon -r dotenv/config ./app.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.5"
+  }
+}
