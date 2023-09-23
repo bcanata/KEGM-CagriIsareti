@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const sessionId = process.env.SESSIONID
 
-app.get('/qrz/:CallSign', async (req, res) => {
+app.get('/:CallSign', async (req, res) => {
   const callSign = req.params.CallSign;
 
   const url = `https://www.kiyiemniyeti.gov.tr/ehizmetler/telsiz_cagri_isareti_sorgula?CallSign=${callSign}`;
