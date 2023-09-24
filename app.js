@@ -1,8 +1,8 @@
 const express = require('express');
 const https = require('https');
-const http = require('http');
 const cheerio = require('cheerio');
 const xml2js = require('xml2js');
+const fetch = require('node-fetch');
 
 const app = express();
 const port = process.env.PORT || 3000;
