@@ -1,6 +1,6 @@
 # Çağrı İşareti Sorgulama (KEGM, QRZ.com, TACallbook.org)
 
-Kıyı Emniyeti Genel Müdürlüğü'nün Çağrı İşareti Sorgulama servisini JSON olarak kullanmanızı sağlar.
+Kıyı Emniyeti Genel Müdürlüğü'nün, QRZ.com'un ve TACallbook.org'un Çağrı İşareti Sorgulama servisini JSON olarak kullanmanızı ve HTML üzerinden sorgulama yapmanızı sağlar.
 
 1. Repo'yu bilgisayarınıza klonlayın:
 
