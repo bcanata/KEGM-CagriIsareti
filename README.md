@@ -14,11 +14,18 @@ Kıyı Emniyeti Genel Müdürlüğü'nün Çağrı İşareti Sorgulama servisini
    ```
 
 * **.env.sample** dosyasındaki gerekli bilgileri doldurarak adını **.env** olarak değiştirin.
-  * Kıyı Emniyeti Genel Müdürlüğü [Çağrı İşareti Sorgulama](https://www.kiyiemniyeti.gov.tr/ehizmetler/telsiz_cagri_isareti_sorgula) servisine kendi bilgileriniz ile giriş yapın. [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg) gibi bir eklenti kullanarak veya Google Chrome Geliştirici Araçları üzerinden **ASP.NET_SessionId** anahtarının değerini bulun.
-  * Bulduğunuz değeri **.env** dosyasında SESSIONID değerinin karşısına yazıp kaydedin.
+  * Kıyı Emniyeti Genel Müdürlüğü [Çağrı İşareti Sorgulama](https://www.kiyiemniyeti.gov.tr/ehizmetler/telsiz_cagri_isareti_sorgula) servisine kendi bilgileriniz ile giriş yapın.
+  * **F12** tuşuna basarak Google Chrome Geliştirici Araçları'nı açın. Aşağıdaki şeklinde **ASP.NET_SessionId** anahtarının değerini bulun.
+  ![Developer Tools](https://gcdnb.pbrd.co/images/C6dgKm9zg4KA.png?o=1)
+  * Bulduğunuz değeri **.env** dosyasında SESSIONID değerinin karşısına yazıp kaydedin. Bu sizin Kıyı Emniyeti **Session ID**'nizdir.
+  * Belli bir süreden sonra Kıyı Emniyeti arabirimine tekrar giriş yapmanız gerekecektir. Paketin kurulu olduğu bilgisayarda herhangi bir tarayıcıdan tekrar giriş yapıp kullanmaya devam edebilirsiniz.
 
-  * QRZ.com üzerinden sorgulamayı kullanmak isterseniz, [QRZ.com XML API](https://www.qrz.com/page/xml_data.html) servisi üzerinden **Session Key** anahtarı oluşturun. 
-  * Bulduğunuz değeri **.env** dosyasında QRZ_SESSION_KEY değerinin karşısına yazıp kaydedin.
+  * QRZ.com üzerinden sorgulamayı kullanmak isterseniz, [QRZ.com XML API](https://www.qrz.com/page/xml_data.html) servisi üzerinden **Session Key** anahtarı oluşturun.
+    * Aşağıdaki bağlantıyı kopyalayıp, kullanıcı adı \(**xxxxxx**) ve şifre \(**abcdef**) kısımlarına kendi QRZ.com çağrı işareti ve şifrenizi yazın.
+      
+      ```https://xmldata.qrz.com/xml/current/?username=xxxxxx;password=abcdef;agent=q5.0```
+    * Bağlantıyı açın. \<Key>**2331uf894c4bd29f3923f3bacf02c532d7bd9**\</Key> arasında, koyu renkli bölümde görüntülenen kısmı kopyalayın. Bu sizin QRZ.com **Session Key**'inizdir.
+  * Bulduğunuz değeri **.env** dosyasında QRZ_SESSION_KEY= değerinin karşısına yazıp kaydedin.
  
 * Projenizi aşağıdaki komutu girerek başlatın:
   ```bash
@@ -35,7 +42,7 @@ Projeniz, ayarladığınız port numarası üzerinde aktif olarak çalışmaya b
 
 ## Docker
 
-Paketi Docker üzerine çalıştırmak için şu komutu kullanabilirsiniz:
+Paketi Docker üzerinde çalıştırmak için şu komutu kullanabilirsiniz:
 
 ```bash
 docker run -p 3000:3000 -d -e SESSIONID=[Kıyı Emniyeti Session ID] -e QRZ_SESSION_KEY=[QRZ Session Key] bcanata/callsign-search:0.0.2 
