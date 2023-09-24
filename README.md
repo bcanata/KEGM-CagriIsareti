@@ -2,10 +2,16 @@
 
 Kıyı Emniyeti Genel Müdürlüğü'nün Çağrı İşareti Sorgulama servisini JSON olarak kullanmanızı sağlar.
 
-* Projenin olduğu klasörün içerisine aşağıdaki komutu girerek NPM projesini kurun:
-  ```
+1. Repo'yu bilgisayarınıza klonlayın:
+
+   ```bash
+   git clone https://github.com/yourusername/KEGM-CagriIsareti.git
+   cd KEGM-CagriIsareti
+
+2. Projenin olduğu klasörün içerisine aşağıdaki komutu girerek NPM projesini kurun:
+```bash
   npm install
-  ```
+```
 
 * **.env.sample** dosyasındaki gerekli bilgileri doldurarak adını **.env** olarak değiştirin.
   * Kıyı Emniyeti Genel Müdürlüğü [Çağrı İşareti Sorgulama](https://www.kiyiemniyeti.gov.tr/ehizmetler/telsiz_cagri_isareti_sorgula) servisine kendi bilgileriniz ile giriş yapın. [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg) gibi bir eklenti kullanarak veya Google Chrome Geliştirici Araçları üzerinden **ASP.NET_SessionId** anahtarının değerini bulun.
@@ -15,7 +21,7 @@ Kıyı Emniyeti Genel Müdürlüğü'nün Çağrı İşareti Sorgulama servisini
   * Bulduğunuz değeri **.env** dosyasında QRZ_SESSION_KEY değerinin karşısına yazıp kaydedin.
  
 * Projenizi aşağıdaki komutu girerek başlatın:
-  ```
+  ```bash
   npm start
   ```
 
@@ -27,9 +33,22 @@ Projeniz, ayarladığınız port numarası üzerinde aktif olarak çalışmaya b
 * http://localhost:3000/tacb/TA1ANW şeklinde sorgulama yaparak TACallbook.com sonuçlarına ulaşabilirsiniz.
 * http://localhost:3000/toplu/TA1ANW şeklinde sorgulama yaparak toplu şekilde KEGM, QRZ.com ve TA Callbook sonuçlarına ulaşabilirsiniz.
 
+## Docker
+
+Paketi Docker üzerine çalıştırmak için şu komutu kullanabilirsiniz:
+
+```bash
+docker run -p 3000:3000 -d -e SESSIONID=[Kıyı Emniyeti Session ID] -e QRZ_SESSION_KEY=[QRZ Session Key] bcanata/callsign-search:0.0.2 
+```
+
+`[Kıyı Emniyeti Session ID]` ve `[QRZ Session Key]` ibarelerini kendinize ait değerler ile değiştirmeyi unutmayın.
+
+[Docker Hub: bcanata/callsign-search](https://hub.docker.com/r/bcanata/callsign-search)
+
 ### Yapılacaklar
 - [ ] TA Callbook'tan fotoğraf eklenecek.
 
 ### Tamamlananlar ✓
 - [x] QRZ.com ve TACallbook.com sorgulama eklendi.
 - [x] http://localhost:3000/ adresinden ulaşılan ön yüz eklendi.
+- [x] Docker Hub'a Docker paketi hazırlandı.
