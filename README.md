@@ -9,9 +9,9 @@ Kıyı Emniyeti Genel Müdürlüğü'nün Çağrı İşareti Sorgulama servisini
    cd KEGM-CagriIsareti
 
 2. Projenin olduğu klasörün içerisine aşağıdaki komutu girerek NPM projesini kurun:
-```bash
-  npm install
-```
+   ```bash
+   npm install
+   ```
 
 * **.env.sample** dosyasındaki gerekli bilgileri doldurarak adını **.env** olarak değiştirin.
   * Kıyı Emniyeti Genel Müdürlüğü [Çağrı İşareti Sorgulama](https://www.kiyiemniyeti.gov.tr/ehizmetler/telsiz_cagri_isareti_sorgula) servisine kendi bilgileriniz ile giriş yapın. [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg) gibi bir eklenti kullanarak veya Google Chrome Geliştirici Araçları üzerinden **ASP.NET_SessionId** anahtarının değerini bulun.
