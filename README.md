@@ -5,7 +5,7 @@ Kıyı Emniyeti Genel Müdürlüğü'nün Çağrı İşareti Sorgulama servisini
 1. Repo'yu bilgisayarınıza klonlayın:
 
    ```bash
-   git clone https://github.com/yourusername/KEGM-CagriIsareti.git
+   git clone https://github.com/bcanata/KEGM-CagriIsareti.git
    cd KEGM-CagriIsareti
 
 2. Projenin olduğu klasörün içerisine aşağıdaki komutu girerek NPM projesini kurun:
