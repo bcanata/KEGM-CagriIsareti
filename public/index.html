@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çağrı İşareti Arama</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #333;
+        }
+        td {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Çağrı İşareti Arama</h1>
+                <div class="d-flex justify-content-center">
+                    <form onsubmit="searchCallsign(); return false;">
+                        <div class="input-group mb-3">
+                            <input type="text" id="callsignInput" class="form-control" placeholder="Çağrı İşareti Girin">
+                            <button type="submit" class="btn btn-primary">Ara</button>
+                        </div>
+                    </form>
+                </div>                
+                <div id="results">
+                    <h2>QRZ.com Kaydı</h2>
+                    <table class="table table-bordered table-striped" id="qrzTable">
+                    </table>
+                    <h2>KEGM Kaydı</h2>
+                    <table class="table table-bordered table-striped" id="kegmTable">
+                    </table>
+                    <h2>TA Callbook Kaydı</h2>
+                    <table class="table table-bordered table-striped" id="tacbTable">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <script>
+
+        const keyTranslations = {
+            "call": "Çağrı İşareti",
+            "fname": "Adı",
+            "name": "Soyadı",
+            "addr2": "Adres",
+            "country": "Ülke",
+            "state": "Şehir",
+            "assigned": "Tahsisli Mi?",
+            "active": "Aktif Mi?",
+            "callsign": "Çağrı İşareti",
+            "phone": "Telefon",
+            "email": "E-Posta",
+            "address": "Adres",
+            "city": "Şehir",
+            "country": "Ülke",
+            "site": "Web Sitesi",
+            "error": "Hata",
+            "trid": "TC Kimlik Numarası",
+            "status": "Durum",
+            "activeUntil": "Geçerlilik Tarihi",
+        };
+
+        async function searchCallsign() {
+            const callsign = document.getElementById("callsignInput").value;
+            const response = await fetch(`/toplu/${callsign}`);
+            const data = await response.json();
+            
+            const qrzTable = document.getElementById("qrzTable");
+            qrzTable.innerHTML = "";
+            for (const key in data.qrz) {
+                const row = document.createElement("tr");
+                const cell1 = document.createElement("td");
+                const cell2 = document.createElement("td");
+                const displayKey = keyTranslations[key] || key;
+                cell1.textContent = displayKey;
+                cell2.textContent = data.qrz[key];
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+                qrzTable.appendChild(row);
+            }
+            
+            const kegmTable = document.getElementById("kegmTable");
+            kegmTable.innerHTML = "";
+            for (const key in data.kegm) {
+                const row = document.createElement("tr");
+                const cell1 = document.createElement("td");
+                const cell2 = document.createElement("td");
+                const displayKey = keyTranslations[key] || key;
+                const displayValue = data.kegm[key] === true ? "Evet" : data.kegm[key] === false ? "Hayır" : data.kegm[key];
+                cell1.textContent = displayKey;
+                cell2.textContent = displayValue;
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+                kegmTable.appendChild(row);
+            }
+            
+            const tacbTable = document.getElementById("tacbTable");
+            tacbTable.innerHTML = "";
+            for (const key in data.tacb) {
+                const row = document.createElement("tr");
+                const cell1 = document.createElement("td");
+                const cell2 = document.createElement("td");
+
+                const displayKey = keyTranslations[key] || key;
+
+                cell1.textContent = displayKey;
+                cell2.textContent = data.tacb[key];
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+                tacbTable.appendChild(row);
+            }
+        }
+    </script>
+</body>
+</html>

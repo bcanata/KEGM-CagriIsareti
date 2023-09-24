@@ -21,6 +21,7 @@ Kıyı Emniyeti Genel Müdürlüğü'nün Çağrı İşareti Sorgulama servisini
 
 Projeniz, ayarladığınız port numarası üzerinde aktif olarak çalışmaya başlayacaktır. 
 
+* http://localhost:3000/ ana sayfaya ulaşarak ön yüz üzerinden toplu KEGM, QRZ.com ve TACallbook.com sorgusu yapabilirsiniz.
 * http://localhost:3000/kegm/TA1ANW şeklinde sorgulama yaparak KEGM Çağrı İşareti Sorgulama sonuçlarına ulaşabilirsiniz.
 * http://localhost:3000/qrz/TA1ANW şeklinde sorgulama yaparak QRZ.com sonuçlarına ulaşabilirsiniz.
 * http://localhost:3000/tacb/TA1ANW şeklinde sorgulama yaparak TACallbook.com sonuçlarına ulaşabilirsiniz.
@@ -31,3 +32,4 @@ Projeniz, ayarladığınız port numarası üzerinde aktif olarak çalışmaya b
 
 ### Tamamlananlar ✓
 - [x] QRZ.com ve TACallbook.com sorgulama eklendi.
+- [x] http://localhost:3000/ adresinden ulaşılan ön yüz eklendi.

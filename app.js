@@ -9,6 +9,8 @@ const port = process.env.PORT || 3000;
 const sessionId = process.env.SESSIONID;
 const qrzSessionKey = process.env.QRZ_SESSION_KEY;
 
+app.use(express.static('public'));
+
 app.get('/qrz/:CallSign', async (req, res) => {
     const callSign = req.params.CallSign;
     let jsonData = {};
@@ -33,7 +35,7 @@ app.get('/qrz/:CallSign', async (req, res) => {
             const errorElement = qrzJson.QRZDatabase.Session[0].Error;
             if (errorElement) {
               const errorMessage = errorElement[0];
-              res.status(400).json({ error: errorMessage });
+              res.status(200).json({ error: errorMessage });
               return;
             }
   
@@ -77,11 +79,17 @@ app.get('/kegm/:CallSign', async (req, res) => {
         
         response.on('end', () => {
             const $ = cheerio.load(data);
+            console.log(data);
+            const titleElement = $('title:contains("Object moved")');
+            if (titleElement.length > 0) {
+                res.status(200).json({ error: 'KEGM girişi yapılmadı' });
+                return;
+            }
             
             const errorElement = $('body > div.wrapper > div > section.content > div > div > div > div.box-body > div > div');
             
             if (errorElement.length > 0) {
-                res.status(400).json({ error: 'Yanlış çağrı işareti' });
+                res.status(200).json({ error: 'Yanlış çağrı işareti' });
                 return;
             }
             
@@ -164,21 +172,26 @@ app.get('/tacb/:CallSign', async (req, res) => {
         const callsign = $("body > center:nth-child(2) > table > tbody > tr > td:nth-child(1) > font:first-of-type").contents().filter(function() {
             return this.nodeType === 3;
         }).text().trim();
-        const name = $("body > center:nth-child(2) > table > tbody > tr > td:nth-child(1) > font > font").text();
+        const fname = $("body > center:nth-child(2) > table > tbody > tr > td:nth-child(1) > font > font").text();
         const email = $("body > center:nth-child(2) > table > tbody > tr > td:nth-child(2) > font:nth-child(22) > a").text().trim();
         const address = $("body > center:nth-child(2) > table > tbody > tr > td:nth-child(2) > font:nth-child(2), body > center:nth-child(2) > table > tbody > tr > td:nth-child(2) > font:nth-child(5)").text().trim();
         const phone = $("body > center:nth-child(2) > table > tbody > tr > td:nth-child(2) > font:nth-child(18)").text().trim();
         const site = $("body > center:nth-child(2) > table > tbody > tr > td:nth-child(2) > font:nth-child(25) > a").text().trim();
-        const icq = $("body > center:nth-child(2) > table > tbody > tr:nth-child(7) > td").text().trim();
-        
+        //const icq = $("body > center:nth-child(2) > table > tbody > tr:nth-child(7) > td").text().trim();
+
+        if (callsign.length === 0) {
+            res.status(200).json({ error: 'Çağrı işareti bulunamadı' });
+            return;
+        }
+        console.log(callsign.length);
         const result = {
             callsign: callsign,
-            name: name,
+            fname: fname,
             phone: phone,
             email: email,
             address: address,
             site: site,
-            icq: icq,
+            //icq: icq,
         };
         
         res.json(result);
