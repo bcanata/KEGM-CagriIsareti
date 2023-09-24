@@ -1,4 +1,4 @@
-# KEGM-CagriIsareti
+# Çağrı İşareti Sorgulama (KEGM, QRZ.com, TACallbook.org)
 
 Kıyı Emniyeti Genel Müdürlüğü'nün Çağrı İşareti Sorgulama servisini JSON olarak kullanmanızı sağlar.
 
