@@ -1,3 +1,13 @@
 node_modules/
 .env
 package-lock.json
+
+# macOS sistem dosyaları
+.DS_Store
+
+# Üretilmiş tarama çıktıları ve API yanıtları (kişisel veri içerebilir)
+response.json
+public/response.json
+public/results.html
+TA1_Callsign_Database.html
+ta2-scan-results.json
